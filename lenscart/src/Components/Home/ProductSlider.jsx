@@ -86,9 +86,9 @@ export const ProductSlider = ({onSlideClick}) => {
       </div>
 
       <div
-        className={`relative w-full h-auto max-w-[80rem] mx-auto rounded-2xl flex justify-evenly transition-all duration-300 mt-4 md:mt-10 p-4 md:p-10 ${
+        className={`relative w-full h-auto max-w-[80rem] mx-auto  flex justify-evenly transition-all duration-300 mt-4 md:mt-10 p-4 md:p-10 ${
           darkMode
-            ? "bg-gray-900 text-white border-2"
+            ? "bg-gray-900 text-white"
             : "bg-white text-gray-900"
         }`}
       >
