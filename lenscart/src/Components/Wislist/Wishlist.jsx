@@ -71,7 +71,7 @@ export const Wishlist = () => {
   return (
     <>
       <div
-        className={`border-2 rounded-2xl p-5 m-5 pb-15 ${
+        className={`rounded-2xl p-5 m-5 pb-15 ${
           darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-900"
         }`}
       >

@@ -229,7 +229,6 @@ const handleSubmit = async (e) => {
     const data = await response.json();
     localStorage.setItem("User", JSON.stringify(data.user));
     setUser(data.user);
-    console.log(data);
 
     if(data.message) {
       toast.success(`${data.message}`, {

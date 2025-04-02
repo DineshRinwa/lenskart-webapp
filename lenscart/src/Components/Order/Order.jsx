@@ -65,7 +65,7 @@ export const Order = () => {
   return (
     <>
       <div
-        className={`border-2 rounded-2xl p-5 m-5 pb-15 ${
+        className={`rounded-2xl p-5 m-5 pb-15 ${
           darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-900"
         }`}
       >
@@ -73,7 +73,9 @@ export const Order = () => {
         {loading ? (
           <TitleSkeleton />
         ) : (
-          <h1 className="text-4xl text-center py-8 tracking-wide">My Orders</h1>
+          <h1 className="text-4xl text-center py-8 tracking-wide">
+            My Order
+          </h1>
         )}
 
         <div className="flex flex-wrap gap-5 m-auto items-center justify-evenly pt-5">
@@ -89,8 +91,7 @@ export const Order = () => {
             ))
           ) : (
             <div className="text-center py-8">
-              <p className="text-xl tracking-wider">No orders found!</p>
-
+              <p className="text-xl tracking-wider">No Order found!</p>
               <button
                 onClick={() => navigate("/")}
                 className={`mt-4 px-12 py-4 text-xl rounded-4xl tracking-wider cursor-pointer ${

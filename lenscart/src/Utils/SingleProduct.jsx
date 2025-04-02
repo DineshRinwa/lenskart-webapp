@@ -29,7 +29,22 @@ export const SingleProduct = () => {
 
   //  Handle Add To Cart
   const handleAddToCart = async () => {
-    setIsAddToCartLoading(true);
+    if(!token) {
+      toast.warn("Please login to add items to Cart", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      return;
+    }
+    
+    setIsBuyNowLoading(true);
 
     try {
       const response = await fetch(`${API_URL}/api/cart/add`, {
@@ -80,6 +95,22 @@ export const SingleProduct = () => {
 
   // Handle Buy Now
   const handleBuyNow = async () => {
+
+    if(!token) {
+      toast.warn("Please Login to Buy Product", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      return;
+    }
+    
     setIsBuyNowLoading(true);
 
     try {
@@ -164,7 +195,7 @@ export const SingleProduct = () => {
   const handleWishlistToggle = async () => {
     if (!token) {
       toast.warn("Please login to add items to wishlist", {
-        position: "top-center",
+        position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: false,

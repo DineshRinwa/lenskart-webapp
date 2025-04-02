@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Heart } from "lucide-react";
 import { useThemeContext } from "../context/ThemeContext";
 import { motion } from "framer-motion";
@@ -17,13 +16,22 @@ export const ProductCard = ({
 }) => {
   const { darkMode } = useThemeContext();
   const defaultColors = ["#FF5733", "#33FF57", "#3357FF", "#FF33A1", "#FFD700"];
-  const [hovered, setHovered] = useState(false);
 
-  const handleCardClick = (e) => {
-    if (onClick && typeof onClick === "function") {
-      onClick(e);
+  const [hovered, setHovered] = useState(false);
+  const [imageIndex, setImageIndex] = useState(0);
+
+  useEffect(() => {
+    let interval;
+    if (hovered && productImage.length > 1) {
+      interval = setInterval(() => {
+        setImageIndex((prevIndex) => (prevIndex + 1) % productImage.length);
+      }, 1200); // Slower transition for smooth effect
+    } else {
+      setImageIndex(0); // Reset to first image when hover stops
     }
-  };
+
+    return () => clearInterval(interval);
+  }, [hovered, productImage.length]);
 
   return (
     <motion.div
@@ -37,37 +45,38 @@ export const ProductCard = ({
           : "bg-white text-gray-900 border-gray-200"
       }
       transition-transform duration-300 hover:scale-105 hover:shadow-xl cursor-pointer`}
-      onClick={handleCardClick}
+      onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
-      {/* Product Image and Wishlist Button */}
-      <div
-        className="relative"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
-        <img
-          src={
-            hovered
-              ? productImage.at(1) || productImage.at(0)
-              : productImage.at(0)
-          }
-          alt={productName}
-          className="w-full h-64 object-cover transition-all duration-300"
-        />
-
-        <button
-          className={`absolute top-2 right-2 p-2 rounded-full cursor-pointer transition-colors
-          ${
-            darkMode
-              ? "bg-gray-700 hover:bg-red-600"
-              : "bg-gray-400 bg-opacity-70 hover:bg-red-700"
-          }`}
-        >
-          <Heart
-            className={`h-6 w-6 ${darkMode ? "text-white" : "text-gray-100"}`}
+      {/* Product Image with Smooth Animation */}
+      <div className="relative w-full h-64">
+        {productImage.map((img, index) => (
+          <motion.img
+            key={index}
+            src={img}
+            alt={productName}
+            className="absolute inset-0 w-full h-full object-cover"
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={imageIndex === index ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
           />
-        </button>
+        ))}
       </div>
+
+      {/* Wishlist Button */}
+      <button
+        className={`absolute top-2 right-2 p-2 rounded-full cursor-pointer transition-colors
+        ${
+          darkMode
+            ? "bg-gray-700 hover:bg-red-600"
+            : "bg-gray-400 bg-opacity-70 hover:bg-red-700"
+        }`}
+      >
+        <Heart
+          className={`h-6 w-6 ${darkMode ? "text-white" : "text-gray-100"}`}
+        />
+      </button>
 
       {/* Product Details */}
       <div className="p-4">

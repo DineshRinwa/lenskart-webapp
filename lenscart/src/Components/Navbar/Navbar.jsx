@@ -1,12 +1,22 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Sun, Moon, X, Menu, ShoppingCart, Package, Heart,  ReceiptText, Lock } from "lucide-react";
+import {
+  Sun,
+  Moon,
+  X,
+  Menu,
+  ShoppingCart,
+  Heart,
+  ReceiptText,
+  Lock,
+} from "lucide-react";
 import { Bounce, toast } from "react-toastify";
 
 import logo from "../../assets/logo.svg";
 import { NavLink } from "./NavLink";
 import { MobileMenu } from "./MobileMenu";
 import { AuthModal } from "../auth/AuthModel";
+import { ProfileDropdown } from "./ProfileDropdown"; // Import the new component
 import { useAuthContext } from "../../context/AuthContext";
 import { useThemeContext } from "../../context/ThemeContext";
 
@@ -19,7 +29,7 @@ export const Navbar = () => {
 
   const handleToggle = (value) => {
     toast.warn(`Please log in to view your ${value}.`, {
-      position: "top-center",
+      position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: false,
@@ -32,13 +42,8 @@ export const Navbar = () => {
   };
 
   return (
-    // <nav
-    //   className={`shadow-md mb-1 ${
-    //     darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"
-    //   }`}
-    // >
     <nav
-      className={`shadow-md mb-1 sticky top-0 z-50 ${
+      className={`shadow-md sticky top-0 z-50 ${
         darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"
       }`}
     >
@@ -58,17 +63,13 @@ export const Navbar = () => {
         </Link>
 
         {/* 🔹 Desktop Menu */}
-        <div className="hidden md:flex space-x-6">
-          {/* <NavLink to="/" label="Home" />
-          <NavLink to="/about" label="About" /> */}
-        </div>
 
         {/* 🔹 Right Actions */}
-        <div className="flex items-center space-x-4">
+        <div className="hidden md:flex items-center space-x-4">
           {user ? (
             <>
               <NavLink to="/order" label="Orders" icon={ReceiptText} />
-              <NavLink to="/wishlist" label="Wishlist" icon={Heart}  />
+              <NavLink to="/wishlist" label="Wishlist" icon={Heart} />
               <NavLink to="/cart" label="Cart" icon={ShoppingCart} />
             </>
           ) : (
@@ -78,7 +79,10 @@ export const Navbar = () => {
                 onClick={() => handleToggle("Orders")}
                 className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:text-blue-600"
               >
-                <ReceiptText size={18} className="hover:text-blue-500 cursor-pointer" />
+                <ReceiptText
+                  size={18}
+                  className="hover:text-blue-500 cursor-pointer"
+                />
                 Order
               </a>
 
@@ -87,7 +91,10 @@ export const Navbar = () => {
                 onClick={() => handleToggle("Wishlist")}
                 className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:text-blue-600"
               >
-                <Heart size={18} className="hover:text-blue-500 cursor-pointer"/>
+                <Heart
+                  size={18}
+                  className="hover:text-blue-500 cursor-pointer"
+                />
                 Wishlist
               </a>
 
@@ -96,20 +103,20 @@ export const Navbar = () => {
                 onClick={() => handleToggle("Cart")}
                 className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:text-blue-600"
               >
-                {<ShoppingCart size={18} className="hover:text-blue-500 cursor-pointer" />}
+                {
+                  <ShoppingCart
+                    size={18}
+                    className="hover:text-blue-500 cursor-pointer"
+                  />
+                }
                 Cart
               </a>
             </>
           )}
 
-          {/* 🔹 Open Login Modal */}
+          {/* 🔹 User Profile or Login Button */}
           {user ? (
-            <span
-              className="py-[5px] px-[12px] rounded-3xl text-xl cursor-pointer text-bold  bg-red-600 text-blue-100"
-              onClick={() => navigate("/profile")}
-            >
-              {user.username[0].toUpperCase()}
-            </span>
+            <ProfileDropdown /> 
           ) : (
             <button
               onClick={() => setShowAuthModal(true)}
@@ -130,6 +137,19 @@ export const Navbar = () => {
         </div>
 
         {/* 🔹 Mobile Menu Button */}
+
+        {user ? (
+           <div className="md:hidden absolute right-14 sm:right-18"><ProfileDropdown /></div>
+        ) : (
+          <button
+            onClick={() => setShowAuthModal(true)}
+            className="md:hidden absolute right-14 sm:right-18 flex items-center gap-2 px-4 py-2 border-gray-300 text-gray-700 hover:text-blue-600 hover:border-blue-600 transition-all duration-200"
+          >
+            <Lock size={18} />
+            Login
+          </button>
+        )}
+
         <button
           className="md:hidden text-2xl hover:cursor-pointer"
           onClick={() => setMenuOpen(!menuOpen)}

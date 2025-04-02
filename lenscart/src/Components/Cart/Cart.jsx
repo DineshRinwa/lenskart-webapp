@@ -18,8 +18,6 @@ export const Cart = () => {
   const [afterDiscount, setAfterDiscount] = useState(0);
   const [discountPercentage, setDiscountPercentage] = useState(0);
 
-  console.log(orderData);
-
   useEffect(() => {
     const calculatePrices = () => {
       const totalMRP = orderData.reduce((accumulator, item) => {
@@ -132,7 +130,7 @@ export const Cart = () => {
   return (
     <>
       <div
-        className={`border-2 rounded-2xl p-5 m-5 pb-15 ${
+        className={`rounded-2xl p-5 m-5 pb-15 ${
           darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-900"
         }`}
       >

@@ -1,10 +1,25 @@
-import { Link } from "react-router-dom";
+import { NavLink as RouterNavLink } from "react-router-dom";
+import { useThemeContext } from "../../context/ThemeContext";
 
 export const NavLink = ({ to, label, icon: Icon }) => {
+  let { darkMode } = useThemeContext();
   return (
-    <Link to={to} className="flex items-center gap-2 px-4 py-2 hover:text-blue-600">
+    <RouterNavLink
+      to={to}
+      className={({ isActive }) =>
+        `flex items-center gap-2 px-4 py-2 transition-colors duration-300 tracking-wider ${
+          isActive
+            ? darkMode
+              ? "text-blue-400"
+              : "text-blue-600"
+            : darkMode
+            ? "text-white"
+            : "text-gray-900"
+        }`
+      }
+    >
       {Icon && <Icon size={20} />}
       {label}
-    </Link>
+    </RouterNavLink>
   );
 };

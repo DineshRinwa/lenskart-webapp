@@ -7,6 +7,12 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
+  //  ✅ User Logout
+  const logout = () => {
+    localStorage.clear("User");
+    setUser(null);
+  }
+
   // 3️⃣ Load user from localStorage on app start
   useEffect(() => {
     const storedUser = localStorage.getItem("User");
@@ -22,7 +28,7 @@ export const AuthProvider = ({ children }) => {
   
 
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={{ user, setUser, logout }}>
       {children}
     </AuthContext.Provider>
   );
