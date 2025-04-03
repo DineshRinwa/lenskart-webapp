@@ -2,9 +2,11 @@
 
 A sleek and interactive **Lenskart-inspired e-commerce UI**, built with **React, Tailwind CSS, and Framer Motion** to deliver a seamless shopping experience. This frontend features **dynamic animations, infinite scrolling, filtering, sorting, and dark/light mode**, making it a visually appealing and user-friendly application.
 
+
 🌐 **Live Demo:** [Lenskart WebApp](https://lenskart-webapp-seven.vercel.app/)  
 
 📂 **Backend Repo:** [Lenskart Backend](https://github.com/DineshRinwa/lenskart-backend-v1)  
+
 
 ## ✨ Features  
 ✅ **Product Listings** – Browse eyewear with filtering by **color, size, price, newest, oldest**  
