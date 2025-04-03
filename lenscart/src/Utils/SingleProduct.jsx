@@ -44,7 +44,7 @@ export const SingleProduct = () => {
       return;
     }
     
-    setIsBuyNowLoading(true);
+    setIsAddToCartLoading(true);
 
     try {
       const response = await fetch(`${API_URL}/api/cart/add`, {
@@ -437,35 +437,6 @@ export const SingleProduct = () => {
         </div>
 
         {/* Action Buttons */}
-        {/* <div className="px-4 pb-4">
-          <button
-            className="w-full py-3 bg-cyan-500 text-white font-medium rounded text-center mb-3 cursor-pointer flex justify-center items-center"
-            onClick={handleBuyNow}
-          >
-            Buy Now
-          </button>
-
-          <button
-            className={`w-full py-3 border ${
-              darkMode ? "border-gray-600" : "border-gray-300"
-            } rounded flex justify-center items-center cursor-pointer`}
-            onClick={handleAddToCart}
-          >
-            <div className="flex items-center">
-              <svg
-                className="w-5 h-5 mr-2"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13 12H3" />
-              </svg>
-              <span>Add To Cart</span>
-            </div>
-          </button>
-        </div> */}
-
         <div className="px-4 pb-4">
           <button
             className="w-full py-3 bg-cyan-500 text-white font-medium rounded text-center mb-3 cursor-pointer flex justify-center items-center"
