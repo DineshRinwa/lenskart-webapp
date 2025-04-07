@@ -16,8 +16,8 @@ A sleek and interactive **Lenskart-inspired e-commerce UI**, built with **React,
 ✅ **Order Placement** – Easy product checkout & order management UI  
 ✅ **Dark/Light Mode** – Toggle between themes for better user experience  
 ✅ **Framer Motion Animations** –  
-  - **Smooth image sliding effects** for modern UI  
-  - **Hover animation on product cards** (cycles through all images on hover)  
+   - **Smooth image sliding effects** for modern UI  
+   - **Hover animation on product cards** (cycles through all images on hover)  
 ✅ **Modern UI Components** – Clean and responsive design with **Tailwind CSS**  
 
 ## 🛠️ Tech Stack  
